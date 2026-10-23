@@ -163,7 +163,7 @@ The request body is a JSON object containing the torrent and the current classif
       { "path": "The Webhook Movie (2000).mkv", "extension": "mkv", "fileType": "video", "size": 1000000000 }
     ]
   },
-  "result": {
+  "classification": {
     "contentType": "unknown",
     "baseTitle": null,
     "date": null,
@@ -194,6 +194,8 @@ The service should respond with a JSON object describing the classification. All
 - If the response contains `"delete": true`, the torrent is deleted (a `delete` error is returned).
 - If the response contains `"matched": false` (and no `delete`), an `unmatched` error is returned.
 - Any non-`2xx` HTTP status, or a response that cannot be parsed, is treated as an unhandled error and terminates classification.
+- The `year` field sets only the year of the release date; month and day are left unset.
+- A `2xx` response with an empty body is treated as a successful match with no changes.
 
 For a full list of available actions, please refer to [the JSON schema](https://bitmagnet.io/schemas/classifier-0.1.json).
 
